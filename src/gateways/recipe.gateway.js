@@ -22,4 +22,28 @@ RecipeGateway.findById = function findById(recipeId) {
   });
 }
 
+RecipeGateway.findForUser = function findForUser(userId) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${config.SERVER_URI}/api/recipes/user/${userId}`)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
+}
+
+RecipeGateway.create = function create(recipe) {
+  return new Promise((resolve, reject) => {
+    axios.post(`${config.SERVER_URI}/api/recipes`, recipe)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
+}
+
+RecipeGateway.update = function update(recipe) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${config.SERVER_URI}/api/recipes`, recipe)
+      .then((response) => resolve(response.data))
+      .catch(reject);
+  });
+}
+
 export default RecipeGateway;

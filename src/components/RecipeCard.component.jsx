@@ -36,6 +36,9 @@ function RecipeCard({ recipe }) {
         <Typography variant="h5" component="h2">
           {recipe.title}
         </Typography>
+        <Typography variant="caption" gutterBottom>
+          <u>Author:</u> {recipe.user?.username}
+        </Typography>
         <Typography variant="body2" component="p">
           {recipe.instructions.slice(0, 75)}
           {' '}

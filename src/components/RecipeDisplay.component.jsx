@@ -43,6 +43,11 @@ function RecipeDisplay({ recipe }) {
           </Typography>
         </Grid>
         <Grid item>
+          <Typography variant="h6">
+            <u>Author:</u> {recipe.user?.username}
+          </Typography>
+        </Grid>
+        <Grid item>
           <RecipeTypeTag type={recipe.type} />
         </Grid>
 

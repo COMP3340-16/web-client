@@ -7,7 +7,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import PageWrapper from '../components/PageWrapper/PageWrapper.component';
 import { useAuth } from '../context/auth.context';
-import { useHistory } from 'react-router-dom';
+import UserRecipes from '../components/UserRecipes.component';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -25,26 +25,24 @@ const useStyles = makeStyles(() => ({
 
 function Profile() {
   const classes = useStyles();
-  const history = useHistory();
   const { user } = useAuth();
 
-  if (!user) history.push('/');
   return (
     <PageWrapper>
       <Container maxWidth="lg" className={classes.container}>
         <Grid container direction="column" alignItems="center" spacing={2}>
-          {user ? (
-            <>
-              <Typography variant="h3">
-                {user.username}
-              </Typography>
-            </>
-          ) : (
-            <Typography variant="h1">
-              Log in first, stupid!
-            </Typography>
+          {user && (
+            <Grid container direction="column" alignItems="center">
+              <Grid item>
+                <Typography variant="h3">
+                  {user.username}
+                </Typography>
+              </Grid>
+              <Grid item style={{ width: '100%' }}>
+                <UserRecipes userId={user.sub} />
+              </Grid>
+            </Grid>
           )}
-
         </Grid>
       </Container>
     </PageWrapper>
