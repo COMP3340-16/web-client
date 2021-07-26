@@ -35,7 +35,7 @@ function UserRecipes({ userId }) {
     <Box component={Paper} variant="outlined" m={2} p={2}>
       <RecipeModal
         isOpen={recipeModalOpen}
-        close={closeRecipeModal}
+        onClose={closeRecipeModal}
       />
       <Grid container direction="column" alignItems="center">
         <Grid item>
