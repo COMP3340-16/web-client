@@ -62,14 +62,14 @@ function Recipe({
           .then((r) => {
             console.log(r);
             toggleNotification(null, "Updated.");
-            onSave(r);
+            if (onSave) onSave(r);
           })
           .catch(toggleNotification);
       } else {
         RecipeGateway.create(dto)
           .then((r) => {
             toggleNotification(null, "Created.");
-            onSave(r);
+            if (onSave) onSave(r);
           })
           .catch(toggleNotification);
       }
@@ -160,10 +160,12 @@ function Recipe({
 Recipe.defaultProps = {
   isOpen: false,
   recipeId: null,
+  onSave: () => { }
 }
 Recipe.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func,
   recipeId: PropTypes.string,
 }
 
