@@ -65,7 +65,7 @@ function Recipes() {
             </Typography>
           </Grid>
           <Grid item>
-            <RecipeCardDeck recipes={recipes} />
+            <RecipeCardDeck recipes={recipes} setRecipes={setRecipes} />
           </Grid>
           <Grid item style={{ width: '100%' }}>
             <Box component={Paper} p={1} variant="outlined">

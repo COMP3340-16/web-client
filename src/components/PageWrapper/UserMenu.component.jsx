@@ -53,6 +53,9 @@ function UserMenu({ user }) {
         open={Boolean(menuAnchor)}
         onClose={closeMenu}
       >
+        {user?.is_admin && (
+          <MenuItem onClick={() => history.push('/admin')} className={classes.menuItem}>Admin Interface</MenuItem>
+        )}
         <MenuItem onClick={() => history.push('/profile')} className={classes.menuItem}>Profile</MenuItem>
         <MenuItem onClick={logout} className={classes.menuItem}>Logout</MenuItem>
       </Menu>

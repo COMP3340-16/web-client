@@ -45,7 +45,7 @@ function UserRecipes({ userId }) {
         </Grid>
         <Grid item style={{ width: '100%' }}>
           {recipes.length > 0 ? (
-            <RecipeCardDeck recipes={recipes} />
+            <RecipeCardDeck recipes={recipes} setRecipes={setRecipes} />
           ) : (
             <Typography variant="caption">
               No Recipes.

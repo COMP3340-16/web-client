@@ -94,7 +94,7 @@ function FeaturedRecipes() {
           </Typography>
         </Grid>
         <Grid item>
-          <RecipeCardDeck recipes={recipes} />
+          <RecipeCardDeck recipes={recipes} setRecipes={setRecipes} />
         </Grid>
         <Grid item container justifyContent="flex-end">
           <Button

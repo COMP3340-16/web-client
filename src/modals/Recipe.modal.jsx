@@ -27,7 +27,7 @@ const DEFAULT_RECIPE = {
 const RECIPE_TYPES = ['breakfast', 'lunch', 'dinner'];
 
 function Recipe({
-  isOpen, onClose, recipeId
+  isOpen, onClose, recipeId, onSave,
 }) {
   const { toggleNotification } = useNotification();
   const { user } = useAuth();
@@ -37,7 +37,12 @@ function Recipe({
   React.useEffect(() => {
     if (recipeId) {
       RecipeGateway.findById(recipeId)
-        .then(setRecipe)
+        .then((r) => {
+          setRecipe({
+            ...r,
+            ingredients: r.ingredients.join('. ')
+          });
+        })
         .catch(toggleNotification);
     }
   }, [recipeId, toggleNotification]);
@@ -52,11 +57,22 @@ function Recipe({
         ingredients: recipe.ingredients.split('.').map((i) => i.trim()).filter((i) => i.length > 2),
         user: user.sub,
       }
-      RecipeGateway.create(dto)
-        .then(() => {
-          toggleNotification(null, "Saved.")
-        })
-        .catch(toggleNotification);
+      if (recipe._id) {
+        RecipeGateway.update(dto)
+          .then((r) => {
+            console.log(r);
+            toggleNotification(null, "Updated.");
+            onSave(r);
+          })
+          .catch(toggleNotification);
+      } else {
+        RecipeGateway.create(dto)
+          .then((r) => {
+            toggleNotification(null, "Created.");
+            onSave(r);
+          })
+          .catch(toggleNotification);
+      }
     }
   }
 

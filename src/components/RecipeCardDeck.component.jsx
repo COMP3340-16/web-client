@@ -14,15 +14,27 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function RecipeCardDeck({ recipes }) {
+function RecipeCardDeck({ recipes, setRecipes }) {
   const classes = useStyles();
+
+  const updateRecipeCard = (update) => {
+    const curRecipes = [...recipes];
+    const idx = curRecipes.map((r) => r._id).indexOf(update._id);
+    if (idx > -1) {
+      curRecipes[idx] = update;
+      setRecipes(curRecipes);
+    }
+  }
 
   return (
     <Box component={Paper} variant="outlined" p={2}>
       <Grid container direction="row" justifyContent="center">
         {recipes.map((recipe) => (
           <Grid item key={recipe._id} className={classes.card}>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard
+              recipe={recipe}
+              update={updateRecipeCard}
+            />
           </Grid>
         ))}
       </Grid>
@@ -34,6 +46,7 @@ RecipeCardDeck.propTypes = {
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
+  setRecipes: PropTypes.func,
 }
 
 export default RecipeCardDeck;
